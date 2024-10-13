@@ -1,0 +1,92 @@
+/* ChatComponent.css */
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #f7f7f8;
+    border: 1px solid #e6e6e6;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.chat-box {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-bubble {
+    max-width: 80%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 15px;
+    word-wrap: break-word;
+}
+
+.chat-bubble.user {
+    align-self: flex-end;
+    background-color: #0084ff;
+    color: white;
+}
+
+.chat-bubble.ai {
+    align-self: flex-start;
+    background-color: #e5e5ea;
+    color: black;
+}
+
+.input-bar {
+    display: flex;
+    padding: 10px;
+    background-color: white;
+    border-top: 1px solid #e6e6e6;
+}
+
+input-bar textarea {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    resize: none;
+}
+
+.input-bar button {
+    margin-left: 10px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #0084ff;
+    color: white;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.input-bar button:disabled {
+    background-color: #c4c4c4;
+}
+
+.loading-spinner {
+    align-self: center;
+    margin-top: 10px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.error-message {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+}
