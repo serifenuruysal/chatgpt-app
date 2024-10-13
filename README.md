@@ -1,70 +1,117 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Django OpenAI Chatbot
 
-## Available Scripts
+A simple chatbot application built using Django and OpenAI’s GPT-3.5-turbo model for generating AI-powered responses.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- Integration with OpenAI’s GPT-3.5-turbo API
+- REST API endpoint to receive and respond to user messages
+- Environment variable configuration for sensitive information (API keys)
+- Logging for debugging and monitoring
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Requirements
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Python 3.11
+- Django 5.x
+- OpenAI Python client library (`openai>=1.0.0`)
+- Django REST Framework
+- `python-dotenv` for environment variable management
 
-### `npm test`
+## Setup Instructions
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 1. Clone the repository
 
-### `npm run build`
+```bash
+git clone https://github.com/yourusername/your-repository-name.git
+cd your-repository-name
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 2. Set up a virtual environment (optional but recommended)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+python3 -m venv venv
+source venv/bin/activate  # For Linux/Mac
+# or
+venv\Scripts\activate  # For Windows
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 3. Install the required packages
 
-### `npm run eject`
+```bash
+pip install -r requirements.txt
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 4. Set up the `.env` file
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Create a `.env` file in the root of your project folder and add your OpenAI API key:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+OPENAI_API_KEY=your_openai_api_key_here
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 5. Run database migrations
 
-## Learn More
+```bash
+python manage.py migrate
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 6. Start the development server
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+python manage.py runserver
+```
 
-### Code Splitting
+The application should now be running on `http://localhost:8000`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## API Endpoints
 
-### Analyzing the Bundle Size
+- **POST /api/chat/**  
+  Sends a user message and receives a response from the AI.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Sample Request
 
-### Making a Progressive Web App
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"message": "Hello"}' http://localhost:8000/api/chat/
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Sample Response
 
-### Advanced Configuration
+```json
+{
+  "message": "Hello! How can I assist you today?"
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Error Handling
 
-### Deployment
+- If an invalid OpenAI API key is provided, the server will return a 401 error.
+- Additional errors are logged for debugging purposes.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## File Structure
 
-### `npm run build` fails to minify
+```
+.
+├── api/
+│   ├── views.py        # Contains the chat view logic
+│   └── urls.py         # API URLs
+├── django_project/
+│   ├── settings.py     # Django settings file (ensure to load .env)
+│   └── urls.py         # Project-wide URL routing
+├── manage.py           # Django management script
+├── .env                # Environment variables
+├── requirements.txt    # Python dependencies
+└── README.md           # Project documentation (this file)
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Logging
+
+Logging is set up to capture important debugging information, including the request and response details. It is recommended to monitor these logs during development and in production to catch any issues.
+
+## Contributing
+
+Feel free to submit issues, fork the repository, and send pull requests. Contributions are welcome!
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
